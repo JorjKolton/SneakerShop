@@ -8,11 +8,13 @@
 		<version>2.7.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
+
 	<groupId>com.sobchenko</groupId>
 	<artifactId>SneakerShop</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>SneakerShop</name>
 	<description>SneakerShop</description>
+
 	<properties>
 		<java.version>19</java.version>
 	</properties>
