@@ -10,8 +10,8 @@ create table products
 (
     id          varchar(255) not null,
     back_image  varchar(255),
-    gender      varchar(255),
-    height      varchar(255),
+    gender      varchar(6),
+    height      varchar(4),
     left_image  varchar(255),
     model       varchar(15),
     price       integer      not null,
@@ -54,7 +54,7 @@ create table users
     email     varchar(255),
     name      varchar(30),
     password  varchar(20),
-    role      varchar(6),
+    role      varchar(7) default 'CLIENT',
     bucket_id varchar(255),
     constraint users_pkey
         primary key (id),
