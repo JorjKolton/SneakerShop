@@ -1,0 +1,50 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <title>Login</title>
+    <link href="/static/css/signin.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/signin.css}"/>
+
+</head>
+
+<body class="text-center">
+
+
+<main class="form-signin w-100 m-auto max-width= 400px">
+    <form th:action="@{/auth}" method="post">
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+            <li><a class="navbar-brand px-2" href="/">
+                <img src="/static/image/logo.PNG" th:src="@{/image/logo.PNG}" alt="" width="300"
+                     height="300"></a>
+            </li>
+        </ul>
+        <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+        <p style="color: coral" th:if="${loginError}" class="error">Wrong email or password!</p>
+
+        <div class="form-floating">
+            <input type="email" class="form-control" id="exampleInputAuthor" th:name="email"
+                   placeholder="name@example.com">
+            <label for="exampleInputAuthor" class="form-label">Email address</label>
+        </div>
+        <div class="form-floating" type="password">
+            <input type="password" class="form-control" id="floatingPassword" th:name="password"
+                   placeholder="Password">
+            <label for="floatingPassword" class="form-label">Password</label>
+        </div>
+
+        <div class="checkbox mb-3">
+            <label><input type="checkbox" value="remember-me"> Remember me</label>
+        </div>
+        <button type="submit" class="w-50 btn btn-lg btn-dark">Sign in</button>
+    </form>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+</body>
+</html>

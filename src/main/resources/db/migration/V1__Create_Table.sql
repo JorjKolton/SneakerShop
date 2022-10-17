@@ -53,7 +53,7 @@ create table users
     id        varchar(255) not null,
     email     varchar(255),
     name      varchar(30),
-    password  varchar(20),
+    password  varchar(255),
     role      varchar(7) default 'CLIENT',
     bucket_id varchar(255),
     constraint users_pkey

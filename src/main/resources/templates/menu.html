@@ -1,0 +1,77 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml"
+      lang="en">
+
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <title>Main menu</title>
+    <link rel="stylesheet" th:href="@{/css/link.css}"/>
+    <link href="/static/css/link.css" rel="stylesheet"/>
+
+</head>
+<body>
+
+<div th:fragment="menu_fragment">
+    <div class="b-example-divider"></div>
+
+    <header class="p-3 text-bg-dark">
+        <div class="container">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                    <li><a class="navbar-brand px-2" href="/">
+                        <img src="/static/image/logo.PNG" th:src="@{/image/logo.PNG}" alt="" width="40"
+                             height="40"></a>
+                    </li>
+                    <li><a href="/" class="nav-link px-2">Home</a></li>
+                    <li><a href="/" class="nav-link px-2">Features</a></li>
+                    <Li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
+                        <button class="btn btn-outline-secondary dropdown-toggle" type="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">Add
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/users/create">User</a></li>
+                            <li><a class="dropdown-item" href="#">Product</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Отдельная ссылка</a></li>
+                        </ul>
+                    </Li>
+
+                </ul>
+
+                <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+                    <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..."
+                           aria-label="Search">
+                </form>
+
+                <div class="text-end">
+                    <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                        <li class="nav-item" sec:authorize="!isAuthenticated()">
+                            <a class="btn btn-outline-light me-2" th:href="@{/login}" role="button">Log in</a>
+                        </li>
+                        <li class="nav-item" sec:authorize="isAuthenticated()">
+                            <a class="btn btn-outline-light me-2" th:href="@{/logout}" role="button">Log out</a>
+                        </li>
+                        <li class="nav-item" sec:authorize="!isAuthenticated()">
+                            <a class="btn btn-outline-warning" th:href="@{users/create}" role="button">Sign Up</a>
+                        </li>
+                        <li><a class="navbar-brand px-2" href="#" sec:authorize="isAuthenticated()">
+                            <img src="/static/image/cart.png" th:src="@{/image/cart.png}" alt="" width="35"
+                                 height="35"></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+</body>
+</html>

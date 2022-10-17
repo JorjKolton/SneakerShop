@@ -22,7 +22,9 @@ public class Product {
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private String id;
+    @NotBlank
     private String title;
+    @NotBlank
     private String model;
     @NotBlank
     private String titleImage;
@@ -33,6 +35,7 @@ public class Product {
     private String topImage;
     @Enumerated(EnumType.STRING)
     private Gender gender;
+    @NotBlank
     @Enumerated(EnumType.STRING)
     private Height height;
     @Min(2000)
