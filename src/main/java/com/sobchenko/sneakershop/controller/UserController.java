@@ -1,10 +1,10 @@
 package com.sobchenko.sneakershop.controller;
 
 import com.sobchenko.sneakershop.dto.UserDTO;
+import com.sobchenko.sneakershop.model.Role;
 import com.sobchenko.sneakershop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -34,7 +34,6 @@ public class UserController {
         return modelAndView;
     }
 
-    @Transactional
     @PostMapping
     public String saveUser(@ModelAttribute("user") @Valid UserDTO userDTO, BindingResult bindingResult, ModelAndView modelAndView) {
         if (bindingResult.hasErrors()) {

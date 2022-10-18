@@ -522,17 +522,17 @@ insert into products (id, back_image, gender, height, left_image, model, price, 
                       title_image, top_image)
 values (
 'ninth',
-'https://2app.kicksonfire.com/kofapp/upload/events_images/ipad_space-jam-x-nike-air-force-1-low-tune-squad-3.jpeg',
-'UNISEX',
-'LOW',
-'https://2app.kicksonfire.com/kofapp/upload/events_master_images/ipad_space-jam-x-nike-air-force-1-low-tune-squad.jpeg',
-'DJ7998-100',
-7700,
-'https://2app.kicksonfire.com/kofapp/upload/events_images/ipad_space-jam-x-nike-air-force-1-low-tune-squad-1.jpeg',
-'https://2app.kicksonfire.com/kofapp/upload/events_images/ipad_space-jam-x-nike-air-force-1-low-tune-squad-4.jpeg',
-'Space Jam x Air Force 1 ''07 Low ''Hare''',
-'https://2app.kicksonfire.com/kofapp/upload/events_images/ipad_space-jam-x-nike-air-force-1-low-tune-squad-0.jpeg',
-'https://2app.kicksonfire.com/kofapp/upload/events_images/ipad_space-jam-x-nike-air-force-1-low-tune-squad-2.jpeg');
+'https://2app.kicksonfire.com/kofapp/upload/events_images/ipad_air-jordan-1-retro-high-og-chicago-3.jpg',
+'MEN',
+'HIGH',
+'https://2app.kicksonfire.com/kofapp/upload/events_master_images/ipad_air-jordan-1-retro-high-og-chicago.jpg',
+'555088101',
+73800,
+'https://2app.kicksonfire.com/kofapp/upload/events_images/ipad_air-jordan-1-retro-high-og-chicago-1.jpg',
+'https://2app.kicksonfire.com/kofapp/upload/events_images/ipad_air-jordan-1-retro-high-og-chicago-4.jpg',
+'Air Jordan 1 Retro High ''Chicago'' 1994',
+'https://2app.kicksonfire.com/kofapp/upload/events_images/ipad_air-jordan-1-retro-high-og-chicago-0.jpg',
+'https://2app.kicksonfire.com/kofapp/upload/events_images/ipad_air-jordan-1-retro-high-og-chicago-2.jpg');
 
 insert into sizes (id, euro_size, number_in_stock, product_id)
 values (

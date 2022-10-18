@@ -50,7 +50,7 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/users/create").permitAll()
+                .antMatchers("/products/**").hasAnyAuthority("ADMIN", "MANAGER")
                 .antMatchers("/css/**","/image/**", "/js/**").permitAll()
                 .anyRequest().permitAll()
                 .and()

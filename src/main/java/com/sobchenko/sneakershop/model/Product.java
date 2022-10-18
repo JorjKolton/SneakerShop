@@ -1,5 +1,6 @@
 package com.sobchenko.sneakershop.model;
 
+import com.sobchenko.sneakershop.validator.ProductValidator;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -35,11 +36,21 @@ public class Product {
     private String topImage;
     @Enumerated(EnumType.STRING)
     private Gender gender;
-    @NotBlank
     @Enumerated(EnumType.STRING)
     private Height height;
     @Min(2000)
     private int price;
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Size> sizes;
+
+    @PrePersist
+    public void prePersist() {
+        ProductValidator.checkImageURL(this);
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        ProductValidator.checkImageURL(this);
+    }
+
 }
