@@ -23,7 +23,7 @@
                 </li>
             </ul>
             <h1 class="h3 mb-3 fw-normal">Fill the fields below</h1>
-
+            <p style="color: coral" th:if="${registrationError}" class="error">Enter a different username or email!</p>
             <div class="row mb-3">
                 <label for="colFormLabel1" class="col-sm-2 col-form-label">Name</label>
                 <div class="col-sm-10">
@@ -40,7 +40,7 @@
                 <label for="colFormLabel3" class="col-sm-2 col-form-label">Password</label>
                 <div class="col-sm-10">
                     <input type="password" class="form-control" id="colFormLabel3" th:field="*{password}"
-                           placeholder="min 8 characters" minlength="8" required>
+                            minlength="8" required>
                 </div>
             </div>
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">

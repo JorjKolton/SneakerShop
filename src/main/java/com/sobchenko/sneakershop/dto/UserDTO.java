@@ -1,5 +1,7 @@
 package com.sobchenko.sneakershop.dto;
 
+import com.sobchenko.sneakershop.model.Role;
+import com.sobchenko.sneakershop.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,4 +21,20 @@ public class UserDTO {
     @Email
     private String email;
     private String role;
+
+    public static User fromDTO(UserDTO userDTO) {
+        final User user = User.builder()
+                .name(userDTO.getUsername())
+                .password(userDTO.getPassword())
+                .email(userDTO.getEmail())
+                .build();
+
+        if (userDTO.getRole() == null) {
+            user.setRole(Role.CLIENT);
+        } else {
+            user.setRole(Role.valueOf(userDTO.getRole()));
+        }
+
+        return user;
+    }
 }

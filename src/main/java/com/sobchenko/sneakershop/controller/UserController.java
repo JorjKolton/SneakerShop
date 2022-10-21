@@ -1,11 +1,9 @@
 package com.sobchenko.sneakershop.controller;
 
 import com.sobchenko.sneakershop.dto.UserDTO;
-import com.sobchenko.sneakershop.model.Role;
 import com.sobchenko.sneakershop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,14 +32,19 @@ public class UserController {
         return modelAndView;
     }
 
+    @RequestMapping("/registration-error")
+    public ModelAndView loginError(UserDTO userDTO, ModelAndView modelAndView) {
+        modelAndView.addObject("registrationError", true);
+        modelAndView.addObject("user", userDTO);
+        modelAndView.setViewName("registration");
+        return modelAndView;
+    }
+
     @PostMapping
-    public String saveUser(@ModelAttribute("user") @Valid UserDTO userDTO, BindingResult bindingResult, ModelAndView modelAndView) {
-        if (bindingResult.hasErrors()) {
-            return "redirect:/users/create";
-        }
+    public String saveUser(@ModelAttribute("user") @Valid UserDTO userDTO, ModelAndView modelAndView) {
         modelAndView.addObject("user", userDTO);
         if (!userService.create(userDTO)) {
-            return "redirect:/users/create";
+            return "redirect:/users/registration-error";
         }
         return "redirect:/";
     }

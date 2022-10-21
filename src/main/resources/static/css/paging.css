@@ -75,12 +75,13 @@ span.pagination-active {
 
 .carousel .carousel-inner {
     display: flex;
-    height:380px;
+    height:390px;
     overflow: hidden;
 }
 
 .carousel .carousel-item {
     align-self: flex-end;
+    margin-bottom: 10px;
 }
 
 .carousel-item img {
@@ -88,4 +89,16 @@ span.pagination-active {
     object-fit: fill;
     object-position: center;
     max-width: 100%;
+}
+
+.carousel-indicators button {
+    align-self: flex-end;
+    min-height: 10px;
+    max-width: 10px;
+    border-radius: 100%;
+    background-color: rgba(57,57,57,0.27) !important;
+}
+
+.carousel-indicators .active {
+    background-color: #2c3e50 !important;
 }

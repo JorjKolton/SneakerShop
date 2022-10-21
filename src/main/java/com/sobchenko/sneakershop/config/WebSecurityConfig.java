@@ -1,6 +1,5 @@
 package com.sobchenko.sneakershop.config;
 
-import com.sobchenko.sneakershop.model.Role;
 import com.sobchenko.sneakershop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -14,13 +13,13 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig {
+    private static final String ADMIN = "ADMIN";
     private UserService userService;
 
     @Autowired
@@ -50,7 +49,9 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/products/**").hasAnyAuthority("ADMIN", "MANAGER")
+                .antMatchers("/products/delete/*").hasAuthority(ADMIN)
+                .antMatchers("/products/save").hasAnyAuthority(ADMIN, "MANAGER")
+                .antMatchers("/products/update/*").hasAnyAuthority(ADMIN, "MANAGER")
                 .antMatchers("/css/**","/image/**", "/js/**").permitAll()
                 .anyRequest().permitAll()
                 .and()

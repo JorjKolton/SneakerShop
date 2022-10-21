@@ -26,22 +26,35 @@
                              height="40"></a>
                     </li>
                     <li><a href="/" class="nav-link px-2">Home</a></li>
-                    <li><a href="https://www.instagram.com/sneaker_culture_ukraine/" target="_blank" class="nav-link px-2">About</a></li>
+                    <li><a href="https://www.instagram.com/sneaker_culture_ukraine/" target="_blank"
+                           class="nav-link px-2">About</a></li>
                     <Li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
                         <button class="btn btn-outline-secondary dropdown-toggle" type="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">Add
                         </button>
                         <ul class="dropdown-menu" style="min-width: 60px">
-                            <li><a class="dropdown-item" href="/users/create">User</a></li>
+                            <li><a class="dropdown-item" th:href="@{/users/create}">User</a></li>
                             <li><a class="dropdown-item" href="#">Product</a></li>
                         </ul>
                     </Li>
 
                 </ul>
 
-                <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-                    <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..."
-                           aria-label="Search">
+                <form th:action="@{'/products/page/' + ${currentPage} + '?sortField='+ ${sortField} +'&sortDir=' + ${reverseSortDir} +'&filter=' + ${filter}}"
+                      method="GET" class="nav col-lg-auto me-lg-auto justify-content-center mb-md-0">
+                    <div>
+                        <input type="hidden" name="pageNo" th:value="${currentPage}"/>
+                        <input type="hidden" name="sortField" th:value="${sortField}"/>
+                        <input type="hidden" name="sortDir" th:value="${reverseSortDir}"/>
+                        <input type="text" name="filter" class="form-control-dark text-bg-dark" placeholder="Search..."
+                               onfocus="if (placeholder === 'Search...') {placeholder = ''}"
+                               onblur="if (placeholder === '') {placeholder = 'Search...'}" aria-label="Search">
+                    </div>
+                    <div>
+                        <button type="submit" class="navbar-brand btn btn-dark">
+                            <img src="/static/image/searchIcon.png" th:src="@{/image/searchIcon.png}" alt="" width="25"
+                                 height="25"></button>
+                    </div>
                 </form>
 
                 <div class="text-end">
@@ -51,13 +64,13 @@
                         </li>
                         <li class="nav-item" sec:authorize="isAuthenticated()">
                             <div class="me-2">Hi,<span sec:authentication="principal.username">Bill</span>
-                            <a class="btn btn-outline-light me-2" th:href="@{/logout}" role="button">Log out</a>
+                                <a class="btn btn-outline-light me-2" th:href="@{/logout}" role="button">Log out</a>
                             </div>
                         </li>
                         <li class="nav-item" sec:authorize="!isAuthenticated()">
                             <a class="btn btn-outline-warning" th:href="@{users/create}" role="button">Sign Up</a>
                         </li>
-                        <li><a class="navbar-brand px-2" href="#" sec:authorize="isAuthenticated()">
+                        <li><a class="navbar-brand px-2" href="#" th:if="${bucket}">
                             <img src="/static/image/cart.png" th:src="@{/image/cart.png}" alt="" width="34"
                                  height="38"></a>
                         </li>
