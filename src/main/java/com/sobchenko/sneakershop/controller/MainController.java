@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.security.Principal;
+
 @Controller
 public class MainController {
     private final ProductController productController;
@@ -16,8 +18,9 @@ public class MainController {
     }
 
     @GetMapping({"", "/"})
-    public ModelAndView viewHomePage(ModelAndView modelAndView) {
-        return productController.findPaginated(1, "title", "asc", "", modelAndView);
+    public ModelAndView viewHomePage(ModelAndView modelAndView, Principal principal) {
+        return productController
+                .findPaginated(1, "title", "asc", "", "", principal, modelAndView);
     }
 
     @RequestMapping("/login")

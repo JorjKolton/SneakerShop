@@ -5,8 +5,34 @@
 .nav-link:hover {
     color: rgba(88, 97, 130, 0.99)
 }
+
 input:focus {
     outline: 0;
     outline-offset: 0;
-    border:0 solid;
+    border: 0 solid;
 }
+
+.form-floating {
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.form-floating label {
+    align-items: center;
+    display: flex;
+    white-space: nowrap
+}
+
+.form-floating label > span {
+    font-size: 0.875em;
+    margin-left: 0.5em;
+    opacity: 0.5;
+    transition: opacity 250ms 0ms ease-in-out;
+}
+
+.form-floating > .form-control:not(:placeholder-shown) ~ label > span {
+    opacity: 0
+}
+
+/*.form-floating>.form-control:focus~label>span {*/
+/*    opacity: 0 }*/

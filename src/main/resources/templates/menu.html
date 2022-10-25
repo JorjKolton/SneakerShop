@@ -40,12 +40,13 @@
 
                 </ul>
 
-                <form th:action="@{'/products/page/' + ${currentPage} + '?sortField='+ ${sortField} +'&sortDir=' + ${reverseSortDir} +'&filter=' + ${filter}}"
+                <form th:action="@{'/products/page/1' + '?sortField='+ ${sortField} +'&sortDir=' + ${reverseSortDir} +'&filter=' + ${filter} +'&productID=' + ${productID}}"
                       method="GET" class="nav col-lg-auto me-lg-auto justify-content-center mb-md-0">
                     <div>
                         <input type="hidden" name="pageNo" th:value="${currentPage}"/>
                         <input type="hidden" name="sortField" th:value="${sortField}"/>
                         <input type="hidden" name="sortDir" th:value="${reverseSortDir}"/>
+                        <input type="hidden" name="productID" th:value="${productID}"/>
                         <input type="text" name="filter" class="form-control-dark text-bg-dark" placeholder="Search..."
                                onfocus="if (placeholder === 'Search...') {placeholder = ''}"
                                onblur="if (placeholder === '') {placeholder = 'Search...'}" aria-label="Search">
@@ -68,9 +69,9 @@
                             </div>
                         </li>
                         <li class="nav-item" sec:authorize="!isAuthenticated()">
-                            <a class="btn btn-outline-warning" th:href="@{users/create}" role="button">Sign Up</a>
+                            <a class="btn btn-outline-warning" th:href="@{/users/create}" role="button">Sign Up</a>
                         </li>
-                        <li><a class="navbar-brand px-2" href="#" th:if="${bucket}">
+                        <li><a class="navbar-brand px-2" th:href="@{/bucket/show}" th:if="${bucket}">
                             <img src="/static/image/cart.png" th:src="@{/image/cart.png}" alt="" width="34"
                                  height="38"></a>
                         </li>

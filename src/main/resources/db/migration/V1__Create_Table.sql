@@ -55,11 +55,8 @@ create table users
     name      varchar(30),
     password  varchar(255),
     role      varchar(7) default 'CLIENT',
-    bucket_id varchar(255),
     constraint users_pkey
-        primary key (id),
-    constraint fk_buckets
-        foreign key (bucket_id) references buckets
+        primary key (id)
 );
 
 alter table buckets

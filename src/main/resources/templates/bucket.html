@@ -1,0 +1,183 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml"
+      lang="en">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <title>bucket</title>
+    <link href="/static/css/link.css" rel="stylesheet"/>
+    <link rel="stylesheet" th:href="@{/css/link.css}"/>
+    <link href="/static/css/bucket.css" rel="stylesheet"/>
+    <link rel="stylesheet" th:href="@{/css/bucket.css}"/>
+</head>
+
+<body>
+
+<div id="menu" th:insert="menu :: menu_fragment"></div>
+
+<section class="h-100 h-custom" style="background-color: #eee;">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body p-4">
+
+                        <div class="row">
+
+                            <div class="col-lg-8">
+                                <h5 class="mb-3"><a href="/" class="btn btn-outline-dark">Continue shopping</a></h5>
+                                <hr>
+
+                                <div class="d-flex justify-content-between align-items-center mb-4">
+                                    <div>
+                                        <p class="mb-0" th:if="${bucket.amountProducts == 1}"><span
+                                                sec:authentication="principal.username"></span>, you have
+                                            [[${bucket.amountProducts}]] item in your cart</p>
+                                        <p class="mb-0" th:if="${bucket.amountProducts > 1}"><span
+                                                sec:authentication="principal.username">Bill</span>, you have
+                                            [[${bucket.amountProducts}]] items in your cart</p>
+                                    </div>
+                                </div>
+
+                                <div class="card mb-3" th:each="detail : ${bucket.details}">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between">
+                                            <div class="d-flex flex-row align-items-center">
+                                                <div>
+                                                    <img src="" class="img-fluid rounded-3" alt=""
+                                                         th:src="${detail.leftImage}" style="width: 80px;">
+                                                </div>
+                                                <div class="ms-3">
+                                                    <h5>[[${detail.title}]]</h5>
+                                                    <p class="small mb-0"><strong>Style: </strong>[[${detail.model}]]
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex flex-row align-items-center">
+                                                <div style="width: 50px;">
+                                                    <h5 class="fw-normal mb-0">[[${detail.amount}]]</h5>
+                                                </div>
+                                                <div style="width: 80px;">
+                                                    <h5 class="mb-0"><strong>₴</strong>[[${detail.sum}]]</h5>
+                                                </div>
+                                                <a class="navbar-brand px-2" href="/">
+                                                    <img src="/static/image/trashIcon.png"
+                                                         th:src="@{/image/trashIcon.png}" alt="" width="24"
+                                                         height="24"></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4">
+
+                                <div class="card bg-dark text-white rounded-3">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between align-items-center mb-4">
+                                            <h5 class="mb-0">Card details</h5>
+                                            <img src="/static/image/securityIcon.png"
+                                                 th:src="@{/image/securityIcon.png}"
+                                                 class="img-fluid" width="36" height="36" alt="">
+                                        </div>
+
+                                        <p class="small mb-2">Card type</p>
+                                        <div class="d-flex">
+                                            <img src="/static/image/visaIcon.png" th:src="@{/image/visaIcon.png}"
+                                                 width="100" height="25" alt="">
+                                        </div>
+
+                                        <form class="mt-4">
+                                            <div class="form-floating mb-3">
+                                                <input type="text" id="typeName"
+                                                       class="form-control bg-dark text-light"
+                                                       placeholder="Cardholder's Name" style="height: 40px">
+                                                <label class="d-flex" style="align-items: center" for="typeName">Cardholder's
+                                                    Name</label>
+                                            </div>
+
+                                            <div class="form-floating mb-4">
+                                                <input type="text" id="typeText"
+                                                       class="form-control bg-dark text-light" size="17"
+                                                       placeholder="1234 5678 9012 3457" minlength="19"
+                                                       maxlength="19" style="height: 40px">
+                                                <label class="d-flex" style="align-items: center" for="typeText">Card
+                                                    Number<span>1234 5678 9012 3457</span></label>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-6 w-75">
+                                                    <div class="form-floating">
+                                                        <input type="text" id="typeExp"
+                                                               class="form-control bg-dark text-light"
+                                                               placeholder="MM/YYYY" size="7" minlength="7"
+                                                               maxlength="7" style="height: 40px">
+                                                        <label class="d-flex" style="align-items: center" for="typeExp">Expiration<span>MM/YYYY</span></label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 w-25">
+                                                    <div class="form-floating">
+                                                        <input type="password" id="typeCVV"
+                                                               class="form-control bg-dark text-light"
+                                                               placeholder="&#9679;&#9679;&#9679;" size="1"
+                                                               minlength="3" maxlength="3" style="height: 40px">
+                                                        <label class="d-flex" style="align-items: center" for="typeCVV">CVV</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+
+                                        <hr class="my-4">
+
+                                        <div class="d-flex justify-content-between">
+                                            <p class="mb-2">Subtotal</p>
+                                            <p class="mb-2">₴[[${bucket.sum}]]</p>
+                                        </div>
+
+                                        <div class="d-flex justify-content-between">
+                                            <p class="mb-2">Estimated Shipping</p>
+                                            <p class="mb-2">Free</p>
+                                        </div>
+
+                                        <div class="d-flex justify-content-between">
+                                            <p class="mb-2">Estimated Tax</p>
+                                            <p class="mb-2">—</p>
+                                        </div>
+
+                                        <hr class="my-4">
+
+                                        <div class="d-flex justify-content-between mb-4">
+                                            <p class="mb-2">Total</p>
+                                            <h5 class="mb-2">₴[[${bucket.sum}]]</h5>
+                                        </div>
+
+                                        <button type="button" class="btn btn-info btn-block btn-lg w-100 mb-2 rounded-5">
+                                            <span>Checkout</span>
+                                        </button>
+
+                                        <button type="button" class="btn btn-light btn-block btn-lg w-100 rounded-5">
+                                            <img class="img-fluid" src="/static/image/payIcon.png" th:src="@{/image/payIcon.png}"
+                                                 width="80" alt="">
+                                        </button>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+</body>
+</html>

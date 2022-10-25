@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface BucketRepository extends CrudRepository<Bucket, String> {
+    boolean existsByUserId(String userId);
 }

@@ -66,8 +66,8 @@ public class ProductService {
     }
 
     @Transactional
-    public void addToUserBucket(String productId, String userEmail) {
-        User user = userService.getUserByEmail(userEmail);
+    public void addToUserBucket(String productId, String userName) {
+        User user = userService.getUserByName(userName);
         Bucket bucket = user.getBucket();
         if (bucket == null) {
             Bucket newBucket = bucketService.createBucket(user, Collections.singletonList(productId));

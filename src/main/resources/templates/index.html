@@ -24,7 +24,8 @@
         <H1><strong>It looks like we have nothing for you</strong></H1>
     </div>
 
-    <div th:if="${totalItems != 0}" class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"
+    <div th:if="${totalItems != 0}"
+         class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"
          style="margin-top: 20px">
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
             <li class="col"><strong>Sneakers ([[${totalItems}]])</strong></li>
@@ -33,7 +34,7 @@
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                 <li class="nav-item">
                     <a class="navbar-brand px-2" href=""
-                       th:href="@{'/products/page/' + ${currentPage} + '?sortField='+ ${sortField} +'&sortDir=' + ${reverseSortDir} +'&filter=' + ${filter}}">
+                       th:href="@{'/products/page/' + ${currentPage} + '?sortField='+ ${sortField} +'&sortDir=' + ${reverseSortDir} +'&filter=' + ${filter} +'&productID=' + ${productID}}">
                         <img src="/static/image/filter.png" th:src="@{/image/filter.png}" alt="" width="20"
                              height="20"></a>
                 </li>
@@ -43,13 +44,13 @@
                     <ul class="dropdown-menu dropdown-menu-start" aria-labelledby="dropdownMenuButton1"
                         style="min-width: 60px">
                         <li><a class="dropdown-item"
-                               th:href="@{'/products/page/' + ${currentPage} + '?sortField=title&sortDir=' + ${reverseSortDir} +'&filter=' + ${filter}}">Name</a>
+                               th:href="@{'/products/page/' + ${currentPage} + '?sortField=title&sortDir=' + ${reverseSortDir} +'&filter=' + ${filter} +'&productID=' + ${productID}}">Name</a>
                         </li>
                         <li><a class="dropdown-item"
-                               th:href="@{'/products/page/' + ${currentPage} + '?sortField=price&sortDir=' + ${reverseSortDir} +'&filter=' + ${filter}}">Price</a>
+                               th:href="@{'/products/page/' + ${currentPage} + '?sortField=price&sortDir=' + ${reverseSortDir} +'&filter=' + ${filter} +'&productID=' + ${productID}}">Price</a>
                         </li>
                         <li><a class="dropdown-item"
-                               th:href="@{'/products/page/' + ${currentPage} + '?sortField=height&sortDir=' + ${reverseSortDir} +'&filter=' + ${filter}}">Height</a>
+                               th:href="@{'/products/page/' + ${currentPage} + '?sortField=height&sortDir=' + ${reverseSortDir} +'&filter=' + ${filter} +'&productID=' + ${productID}}">Height</a>
                         </li>
                     </ul>
                 </li>
@@ -121,7 +122,8 @@
                     <p class="card-text"><strong>Style: </strong>[[${product.model}]]</p>
                     <p class="card-text"><strong>Gender: </strong>[[${product.gender}]]</p>
                     <p class="card-text"><strong>Price: </strong>[[${product.price}]] UAH</p>
-                    <a href="#" sec:authorize="hasAuthority('CLIENT')" class="btn btn-outline-dark mt-auto">Add to
+                    <a th:href="@{'/products/page/' + ${currentPage} + '?sortField='+ ${sortField} +'&sortDir=' + ${sortDir} +'&filter=' + ${filter} +'&productID=' + ${product.id}}"
+                       sec:authorize="hasAuthority('CLIENT')" class="btn btn-outline-dark mt-auto">Add to
                         Bag</a>
                     <div class="d-flex mt-auto gap-2 justify-content-center"
                          sec:authorize="hasAnyAuthority('ADMIN', 'MANAGER')">
@@ -139,16 +141,16 @@
         <nav class="pagination-container">
             <div class="pagination">
                 <a class="pagination-newer" th:if="${currentPage > 2}"
-                   th:href="@{'/products/page/' + ${1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} +'&filter=' + ${filter}}">FIRST</a>
+                   th:href="@{'/products/page/' + ${1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} +'&filter=' + ${filter} +'&productID=' + ${productID}}">FIRST</a>
                 <span class="pagination-inner">
                     <span th:each="i: ${#numbers.sequence(1, totalPages)}">
 						<a th:if="${currentPage != i and i < currentPage + 2 and i > currentPage - 2}"
-                           th:href="@{'/products/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} +'&filter=' + ${filter}}">[[${i}]]</a>
+                           th:href="@{'/products/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} +'&filter=' + ${filter} +'&productID=' + ${productID}}">[[${i}]]</a>
 						<span th:if="${currentPage == i}" class="pagination-active">[[${i}]]</span>
 					</span>
                 </span>
                 <a class="pagination-older" th:if="${currentPage < totalPages -1}"
-                   th:href="@{'/products/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} +'&filter=' + ${filter}}">LAST</a>
+                   th:href="@{'/products/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} +'&filter=' + ${filter} +'&productID=' + ${productID}}">LAST</a>
             </div>
         </nav>
     </div>

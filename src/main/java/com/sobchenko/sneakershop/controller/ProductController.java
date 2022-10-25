@@ -2,6 +2,7 @@ package com.sobchenko.sneakershop.controller;
 
 import com.sobchenko.sneakershop.dto.ProductDTO;
 import com.sobchenko.sneakershop.model.Product;
+import com.sobchenko.sneakershop.service.BucketService;
 import com.sobchenko.sneakershop.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -14,16 +15,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
 @RequestMapping("/products")
 public class ProductController {
     private final ProductService productService;
+    private final BucketService bucketService;
 
     @Autowired
-    public ProductController(ProductService productService) {
+    public ProductController(ProductService productService, BucketService bucketService) {
         this.productService = productService;
+        this.bucketService = bucketService;
     }
 
     @GetMapping("/delete/{id}")
@@ -52,8 +56,18 @@ public class ProductController {
                                       @RequestParam("sortField") String sortField,
                                       @RequestParam("sortDir") String sortDir,
                                       @RequestParam("filter") String filter,
-                                      ModelAndView modelAndView) {
-        int pageSize = 3;
+                                      @RequestParam("productID") String productID,
+                                      Principal principal, ModelAndView modelAndView) {
+        int pageSize = 3; // number of products per page for example
+        boolean bucket = false;
+
+        if (principal != null) {
+            bucket = bucketService.existByUserName(principal.getName());
+            if (!productID.isEmpty()) {
+                productService.addToUserBucket(productID, principal.getName());
+                bucket = true;
+            }
+        }
 
         Page<Product> page = productService.findPaginated(pageNo, pageSize, sortField, sortDir, filter);
         List<Product> products = page.getContent();
@@ -68,7 +82,8 @@ public class ProductController {
         modelAndView.addObject("filter", filter);
 
 
-        modelAndView.addObject("bucket", false);
+        modelAndView.addObject("bucket", bucket);
+        modelAndView.addObject("productID", "");
         modelAndView.addObject("products", products);
         modelAndView.setViewName("index");
         return modelAndView;
