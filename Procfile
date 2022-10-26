@@ -1,1 +1,1 @@
-web: java -jar target/sneaker-shop-ua.app-1.0-SNAPSHOT.jar
+web: java -jar target/SneakerShop-1.0-SNAPSHOT.jar
