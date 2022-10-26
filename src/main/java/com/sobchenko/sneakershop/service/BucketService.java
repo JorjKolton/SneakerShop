@@ -52,8 +52,16 @@ public class BucketService {
         bucketRepository.save(bucket);
     }
 
-    public boolean existByUserName(String username) {
-        return bucketRepository.existsByUserId(userService.getUserByName(username).getId());
+    public void deleteProduct(Bucket bucket, String productID) {
+        bucket.getProducts().removeIf(item -> item.getId().equals(productID));
+    }
+
+    public boolean isNotEmptyBucketByUserName(String username) {
+        final User user = userService.getUserByName(username);
+        if (bucketRepository.existsByUserId(user.getId())) {
+            return !user.getBucket().getProducts().isEmpty();
+        }
+        return false;
     }
 
     public BucketDTO getBucketByUser(String name) {

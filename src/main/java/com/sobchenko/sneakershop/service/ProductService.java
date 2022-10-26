@@ -78,4 +78,9 @@ public class ProductService {
         }
     }
 
+    @Transactional
+    public void deleteFromUserBucket(String productId, String userName) {
+        User user = userService.getUserByName(userName);
+        bucketService.deleteProduct(user.getBucket(), productId);
+    }
 }

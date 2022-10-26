@@ -52,5 +52,4 @@ public class Product {
     public void preUpdate() {
         ProductValidator.checkImageURL(this);
     }
-
 }

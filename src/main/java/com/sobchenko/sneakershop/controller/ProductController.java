@@ -62,7 +62,7 @@ public class ProductController {
         boolean bucket = false;
 
         if (principal != null) {
-            bucket = bucketService.existByUserName(principal.getName());
+            bucket = bucketService.isNotEmptyBucketByUserName(principal.getName());
             if (!productID.isEmpty()) {
                 productService.addToUserBucket(productID, principal.getName());
                 bucket = true;
@@ -88,5 +88,4 @@ public class ProductController {
         modelAndView.setViewName("index");
         return modelAndView;
     }
-
 }
