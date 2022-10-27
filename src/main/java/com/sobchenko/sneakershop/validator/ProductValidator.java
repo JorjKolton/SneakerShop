@@ -9,7 +9,7 @@ public final class ProductValidator {
     private ProductValidator() {
     }
 
-    public static boolean checkImageURL(Product product) {
+    public static void checkImageURL(Product product) {
         final List<String> urls = Arrays.asList(product.getBackImage(),
                 product.getLeftImage(),
                 product.getRightImage(),
@@ -21,7 +21,6 @@ public final class ProductValidator {
                 throw new IllegalArgumentException("Invalid url address to image");
             }
         }
-        return true;
     }
 
 }

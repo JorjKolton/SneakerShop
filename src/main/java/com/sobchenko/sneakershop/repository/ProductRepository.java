@@ -10,5 +10,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ProductRepository extends CrudRepository<Product, String>, PagingAndSortingRepository<Product, String> {
     Product getById(String id);
+
     Page<Product> findByIgnoreCaseTitleContaining(String filter, Pageable pageable);
 }

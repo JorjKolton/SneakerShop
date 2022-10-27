@@ -11,5 +11,4 @@ public final class UserValidator {
             throw new IllegalArgumentException("Invalid email address");
         }
     }
-
 }
