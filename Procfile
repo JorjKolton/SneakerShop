@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -jar target/SneakerShop-1.0-SNAPSHOT.jar
+web: java -jar target/SneakerShop-1.0-SNAPSHOT.jar
